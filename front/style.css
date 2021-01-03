@@ -1,0 +1,17 @@
+.product-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: rgba(97, 136, 87, 0.774);
+}
+#title{
+    text-align: center;
+    font-size: 60px;
+}
+
+footer{
+    background-color: gray;
+    text-align: center;
+    color: rgb(218, 245, 202);
+}
