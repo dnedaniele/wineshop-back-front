@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const Wine = require("./modules/Wine"); 
+const Wine = require("./modules/Wine");
 require("dotenv").config();
 
 const app = express();
@@ -23,17 +23,19 @@ mongoose
 
 // ROUTES
 
+let wines = [];
+
 app.get("/", (req, res) => {
   res.send("this is the homepage");
 });
 
 // POST create one Wine
 app.post("/wines", async (req, res) => {
-  const wine = new Wine ({
-image: req.body.image,
-typeName : req.body.typeName,
-specName: req.body.specName,
-price: req.body.price,
+  const wine = new Wine({
+    image: req.body.image,
+    typeName: req.body.typeName,
+    specName: req.body.specName,
+    price: req.body.price,
   });
   try {
     const savedWine = await wine.save();
@@ -45,25 +47,39 @@ price: req.body.price,
 
 // GET the Full List of Wines
 
-app.get("/wines-list", async (req, res)=>{
-const wineList = await Wine.find({}).exec();
-if (!wineList) throw Error("No Items");
-    res.status(200).json(wineList);
-}); 
+app.get("/wines-list", async (req, res) => {
+  const wineList = await Wine.find({}).exec();
+  if (!wineList) throw Error("No Items");
+  res.status(200).json(wineList);
+});
 
 // GET only one Wine selected by ID
 
-app.get("/wines/:wineId", async (req,res)=>{
-const wineId = req.params.wineId;
-const wine = await Wine.findOne({_id: wineId});
-if(!wine){
+app.get("/wines/:wineId", async (req, res) => {
+  const wineId = req.params.wineId;
+  const wine = await Wine.findOne({ _id: wineId });
+  if (!wine) {
     res.status(404).end();
-}else{
+  } else {
     res.json(wine);
-}
+  }
 });
 
 // DELETE one Wine selected by ID
+
+app.delete("/wines/:wineId", async (req, res) => {
+  const wineId = req.params.wineId;
+  const wineList = await Wine.find({}).exec();
+  
+  wineList.forEach((prod,index)=>{
+    if (prod.id === wineId) {
+      let newWine = {};
+      wineList[index] = newWine;
+    }
+  });
+  res.json(wineList); 
+});
+
 
 // PUT - Change the details of a Wine selected by Id
 
