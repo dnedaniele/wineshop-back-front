@@ -17,6 +17,7 @@ mongoose
   .connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
@@ -67,21 +68,45 @@ app.get("/wines/:wineId", async (req, res) => {
 
 // DELETE one Wine selected by ID
 
+// EASY VERSION // more performant version 1 call to DB
+
+/* app.delete("/wines/:wineId", async (req, res) => {
+  const wineId = req.params.wineId;
+  await Wine.deleteOne({ _id: wineId }).exec(); //
+ console.log(req.params.wineId)
+  res.status(204).end();
+}); */
+
+// DANIELE VERSION // less performant version 2 calls to DB
+
 app.delete("/wines/:wineId", async (req, res) => {
   const wineId = req.params.wineId;
-  const wineList = await Wine.find({}).exec();
-  
-  wineList.forEach((prod,index)=>{
-    if (prod.id === wineId) {
-      let newWine = {};
-      wineList[index] = newWine;
-    }
-  });
-  res.json(wineList); 
+  const wine = await Wine.findOne({ _id: wineId });
+  if (!wine) {
+    res.status(404).end();
+  } else {
+    await Wine.deleteOne(wine).exec(); //
+    res.status(200).json(`deleted:  ${wine.specName}`);
+  }
 });
 
-
 // PUT - Change the details of a Wine selected by Id
+
+app.patch("/wines/:wineId", async (req, res) => {
+  try {
+    const wine = await Wine.findByIdAndUpdate(req.params.wineId, req.body, {
+      new: true,
+    }).exec();
+    console.log(wine);
+    if (!wine) {
+      res.status(404).json({ message: "no object was found" });
+    }
+    res.status(200).json(wine);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "an internal error has occured" });
+  }
+});
 
 // Listen
 
