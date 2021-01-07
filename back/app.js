@@ -70,16 +70,16 @@ app.get("/wines/:wineId", async (req, res) => {
 
 // EASY VERSION // more performant version 1 call to DB
 
-/* app.delete("/wines/:wineId", async (req, res) => {
+app.delete("/wines/:wineId", async (req, res) => {
   const wineId = req.params.wineId;
   await Wine.deleteOne({ _id: wineId }).exec(); //
  console.log(req.params.wineId)
   res.status(204).end();
-}); */
+});
 
 // DANIELE VERSION // less performant version 2 calls to DB
 
-app.delete("/wines/:wineId", async (req, res) => {
+/* app.delete("/wines/:wineId", async (req, res) => {
   const wineId = req.params.wineId;
   const wine = await Wine.findOne({ _id: wineId });
   if (!wine) {
@@ -88,7 +88,7 @@ app.delete("/wines/:wineId", async (req, res) => {
     await Wine.deleteOne(wine).exec(); //
     res.status(200).json(`deleted:  ${wine.specName}`);
   }
-});
+}); */
 
 // PUT - Change the details of a Wine selected by Id
 
