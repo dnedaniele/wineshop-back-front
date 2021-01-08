@@ -2,7 +2,6 @@ function renderSingleProduct(wine) {
   const productContainer = document.createElement("div");
   productContainer.classList.add("card");
   productContainer.classList.add("product");
-  productContainer.innerHTML = "hallo"; //
 
   // css
   productContainer.style.width = "width: 18rem";
@@ -17,14 +16,13 @@ function renderSingleProduct(wine) {
 
   // Content from Server
 
-   const productImg = document.createElement("img");
+  const productImg = document.createElement("img");
   productImg.classList.add("card-img-top");
-  productImg.src = wine.image; 
+  productImg.src = wine.image;
 
   const typeNameTag = document.createElement("h4");
   typeNameTag.classList.add("card-title");
   typeNameTag.innerHTML = wine.typeName;
-
 
   cardContainer.appendChild(productImg);
   cardContainer.appendChild(typeNameTag);
@@ -36,8 +34,8 @@ function renderSingleProduct(wine) {
 }
 
 function renderProductList(list) {
-    list.forEach(renderSingleProduct); 
-  }
+  list.forEach(renderSingleProduct);
+}
 
 // Old FETCH
 
