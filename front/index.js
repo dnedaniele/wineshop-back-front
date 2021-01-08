@@ -15,8 +15,29 @@ function renderSingleProduct(wine) {
   cardContainer.style.display = "flex";
   cardContainer.style.flexDirection = "column";
 
+  // Content from Server
+
+   const productImg = document.createElement("img");
+  productImg.classList.add("card-img-top");
+  productImg.src = wine.image; 
+
+  const typeNameTag = document.createElement("h4");
+  typeNameTag.classList.add("card-title");
+  typeNameTag.innerHTML = wine.typeName;
+
+
+  cardContainer.appendChild(productImg);
+  cardContainer.appendChild(typeNameTag);
+
+  // oldest parent
+  productContainer.appendChild(cardContainer);
+
   document.getElementById("prod-list-cont").appendChild(productContainer);
 }
+
+function renderProductList(list) {
+    list.forEach(renderSingleProduct); 
+  }
 
 // Old FETCH
 
