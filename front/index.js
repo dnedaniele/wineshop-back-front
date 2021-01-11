@@ -53,11 +53,15 @@ function renderProductList(list) {
 // ASYNC AWAIT
 
 const getProduct = async () => {
+  
   const response = await fetch(`http://localhost:3000/wines-list`);
   const data = await response.json();
-
   console.log(data);
-  renderSingleProduct(data);
+
+  
+    renderProductList(data);
+  
+ 
 };
 
 getProduct();
