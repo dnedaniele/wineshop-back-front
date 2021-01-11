@@ -73,7 +73,7 @@ app.get("/wines/:wineId", async (req, res) => {
 app.delete("/wines/:wineId", async (req, res) => {
   const wineId = req.params.wineId;
   await Wine.deleteOne({ _id: wineId }).exec(); //
- console.log(req.params.wineId)
+ //console.log(req.params.wineId)
   res.status(204).end();
 });
 
@@ -97,7 +97,7 @@ app.patch("/wines/:wineId", async (req, res) => {
     const wine = await Wine.findByIdAndUpdate(req.params.wineId, req.body, {
       new: true,
     }).exec();
-    console.log(wine);
+    //console.log(wine);
     if (!wine) {
       res.status(404).json({ message: "no object was found" });
     }

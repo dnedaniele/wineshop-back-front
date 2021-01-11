@@ -2,6 +2,7 @@ function renderSingleProduct(wine) {
   const productContainer = document.createElement("div");
   productContainer.classList.add("card");
   productContainer.classList.add("product");
+  productContainer.style= "width: 18rem"; 
 
   // css
   productContainer.style.width = "width: 18rem";
@@ -16,16 +17,38 @@ function renderSingleProduct(wine) {
 
   // Content from Server
 
+  //IMG
   const productImg = document.createElement("img");
   productImg.classList.add("card-img-top");
   productImg.src = wine.image;
 
+  // typeName
   const typeNameTag = document.createElement("h4");
   typeNameTag.classList.add("card-title");
   typeNameTag.innerHTML = wine.typeName;
 
+  //specName
+  const specName = document.createElement("h5");
+  specName.innerHTML = wine.specName;
+
+  //price
+  const price = document.createElement("p");
+  price.classList.add("card-text");
+  price.innerHTML = "Price: " + wine.price + " €";
+
+  //Details Buttons
+  const detailsButton = document.createElement("a");
+  detailsButton.classList.add("btn");
+  detailsButton.classList.add("btn-primary");
+  detailsButton.href = `http://localhost:3000/wines/5ff3517695c26e2f989555fe`
+  detailsButton.innerHTML = "Product Details";
+
+  // append all
   cardContainer.appendChild(productImg);
   cardContainer.appendChild(typeNameTag);
+  cardContainer.appendChild(specName);
+  cardContainer.appendChild(price);
+  cardContainer.appendChild(detailsButton); 
 
   // oldest parent
   productContainer.appendChild(cardContainer);
@@ -53,15 +76,11 @@ function renderProductList(list) {
 // ASYNC AWAIT
 
 const getProduct = async () => {
-  
   const response = await fetch(`http://localhost:3000/wines-list`);
   const data = await response.json();
   console.log(data);
 
-  
-    renderProductList(data);
-  
- 
+  renderProductList(data);
 };
 
 getProduct();
