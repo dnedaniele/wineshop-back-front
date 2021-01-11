@@ -36,44 +36,25 @@ function renderSingleProduct(wine) {
   price.classList.add("card-text");
   price.innerHTML = "Price: " + wine.price + " €";
 
-  //Details Buttons
-  const detailsButton = document.createElement("a");
-  detailsButton.classList.add("btn");
-  detailsButton.classList.add("btn-primary");
-  detailsButton.href = `./single-product-page.html?productId=${wine._id}`
-  detailsButton.innerHTML = "Product Details";
+  //Add-to-Cart Buttons
+  const addToCartButton = document.createElement("a");
+  addToCartButton.classList.add("btn");
+  addToCartButton.classList.add("btn-primary");
+  //addToCartButton.href = `./single-product-page.html?productId=${wine._id}`
+  addToCartButton.innerHTML = "Add to Cart";
 
   // append all
   cardContainer.appendChild(productImg);
   cardContainer.appendChild(typeNameTag);
   cardContainer.appendChild(specName);
   cardContainer.appendChild(price);
-  cardContainer.appendChild(detailsButton); 
+  cardContainer.appendChild(addToCartButton); 
 
   // oldest parent
   productContainer.appendChild(cardContainer);
 
   document.getElementById("prod-list-cont").appendChild(productContainer);
 }
-
-function renderProductList(list) {
-  list.forEach(renderSingleProduct);
-}
-
-// Old FETCH
-
-/* fetch("http://localhost:3000/wines-list", {
-      method: "get",
-      mode: "cors"
-    }).then((response) => (response.json())
-    ).then((data) => {
-      console.log(data);
-
-    }); */
-
-// resources: https://www.youtube.com/watch?v=CWjNefiE47Y , https://www.youtube.com/watch?v=Yp9KIcSKTNo
-
-// ASYNC AWAIT
 
 const getProduct = async () => {
   const response = await fetch(`http://localhost:3000/wines-list`);
