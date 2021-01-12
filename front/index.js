@@ -2,7 +2,7 @@ function renderSingleProduct(wine) {
   const productContainer = document.createElement("div");
   productContainer.classList.add("card");
   productContainer.classList.add("product");
-  productContainer.style= "width: 18rem"; 
+  productContainer.style = "width: 18rem";
 
   // css
   productContainer.style.width = "width: 18rem";
@@ -40,7 +40,7 @@ function renderSingleProduct(wine) {
   const detailsButton = document.createElement("a");
   detailsButton.classList.add("btn");
   detailsButton.classList.add("btn-primary");
-  detailsButton.href = `./single-product-page.html?productId=${wine._id}`
+  detailsButton.href = `./single-product-page.html?productId=${wine._id}`;
   detailsButton.innerHTML = "Product Details";
 
   // append all
@@ -48,7 +48,7 @@ function renderSingleProduct(wine) {
   cardContainer.appendChild(typeNameTag);
   cardContainer.appendChild(specName);
   cardContainer.appendChild(price);
-  cardContainer.appendChild(detailsButton); 
+  cardContainer.appendChild(detailsButton);
 
   // oldest parent
   productContainer.appendChild(cardContainer);

@@ -58,8 +58,8 @@ function renderSingleProduct(wine) {
 
 const getProduct = async () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const productId = urlParams.get("productId")
-  console.log(productId);
+  const productId = urlParams.get("productId");
+
   const response = await fetch(`http://localhost:3000/wines/${productId}`);
   const data = await response.json();
   console.log(data);
