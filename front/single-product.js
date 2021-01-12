@@ -40,7 +40,7 @@ function renderSingleProduct(wine) {
   const addToCartButton = document.createElement("a");
   addToCartButton.classList.add("btn");
   addToCartButton.classList.add("btn-primary");
-  //addToCartButton.href = `./add-to-cart.html?productId=${wine._id}`
+  addToCartButton.href = `./t-cart.html?productId=${wine._id}`
   addToCartButton.innerHTML = "Add to Cart";
 
   // append all
