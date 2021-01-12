@@ -2,7 +2,7 @@ function renderSingleProduct(wine) {
   const productContainer = document.createElement("div");
   productContainer.classList.add("card");
   productContainer.classList.add("product");
-  productContainer.style= "width: 18rem"; 
+  productContainer.style = "width: 18rem";
 
   // css
   productContainer.style.width = "width: 18rem";
@@ -15,7 +15,7 @@ function renderSingleProduct(wine) {
   cardContainer.style.display = "flex";
   cardContainer.style.flexDirection = "column";
 
-  // Content from Server
+  // Content from MongoDB
 
   //IMG
   const productImg = document.createElement("img");
@@ -40,7 +40,7 @@ function renderSingleProduct(wine) {
   const addToCartButton = document.createElement("a");
   addToCartButton.classList.add("btn");
   addToCartButton.classList.add("btn-primary");
-  //addToCartButton.href = `./single-product-page.html?productId=${wine._id}`
+  //addToCartButton.href = `./add-to-cart.html?productId=${wine._id}`
   addToCartButton.innerHTML = "Add to Cart";
 
   // append all
@@ -48,7 +48,7 @@ function renderSingleProduct(wine) {
   cardContainer.appendChild(typeNameTag);
   cardContainer.appendChild(specName);
   cardContainer.appendChild(price);
-  cardContainer.appendChild(addToCartButton); 
+  cardContainer.appendChild(addToCartButton);
 
   // oldest parent
   productContainer.appendChild(cardContainer);
@@ -57,11 +57,14 @@ function renderSingleProduct(wine) {
 }
 
 const getProduct = async () => {
-  const response = await fetch(`http://localhost:3000/wines-list`);
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get("productId")
+  console.log(productId);
+  const response = await fetch(`http://localhost:3000/wines/${productId}`);
   const data = await response.json();
   console.log(data);
 
-  renderProductList(data);
+  renderSingleProduct(data);
 };
 
 getProduct();
