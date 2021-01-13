@@ -2,10 +2,10 @@ function renderSingleProduct(wine) {
     const productContainer = document.createElement("div");
     productContainer.classList.add("card");
     productContainer.classList.add("product");
-    productContainer.style = "width: 18rem";
+    productContainer.style = "width: 13rem";
   
     // css
-    productContainer.style.width = "width: 18rem";
+    productContainer.style.width = "width: 13rem";
     productContainer.style.display = "flex";
     productContainer.style.flexDirection = "column";
   
@@ -14,6 +14,10 @@ function renderSingleProduct(wine) {
   
     cardContainer.style.display = "flex";
     cardContainer.style.flexDirection = "column";
+
+    // list ul
+    const unorderedList = document.createElement("ul");
+  
   
     // Content from MongoDB
   
@@ -51,7 +55,9 @@ function renderSingleProduct(wine) {
     cardContainer.appendChild(buyButton);
   
     // oldest parent
-    productContainer.appendChild(cardContainer);
+    unorderedList.appendChild(cardContainer);
+    productContainer.appendChild(unorderedList);
+    
   
     document.getElementById("prod-list-cont").appendChild(productContainer);
   }
