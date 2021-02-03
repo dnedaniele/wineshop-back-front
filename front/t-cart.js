@@ -55,7 +55,7 @@ function renderSingleProduct(wine) {
     productContainer.appendChild(cardPriceTot);
     setTimeout(function () {
       alert("THANKS A LOT FOR YOUR PURCHASE");
-    }, 2000);
+    }, 1500);
   };
 
   // append all
